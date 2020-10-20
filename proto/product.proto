@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package product;
+
+service ProductService {
+    rpc Fetch(FetchRequest) returns (Empty) {};
+    rpc List(ListParams) returns (ListResponse) {};
+}
+
+message FetchRequest {
+    string Url = 1;
+}
+
+message FetchResponse {
+    string Error = 1;
+}
+
+message ListParams {
+    PagingParams pagingParams = 1;
+    SortParams sortParams = 2;
+}
+
+message PagingParams {
+    int32 Page = 1;
+    int32 Offset = 2;
+    int32 Limit = 3;
+}
+
+message SortParams {
+    int32 Name = 1;
+    int32 Price = 2;
+    int32 LastUpdate = 3;
+}
+
+message Empty {
+}
+
+message ListResponse {
+    repeated Product ListProduct = 1;
+}
+
+message Product {
+    string Name = 1;
+    int32 Counter = 2;
+    double Price = 3;
+}

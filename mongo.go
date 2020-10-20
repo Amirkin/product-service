@@ -19,8 +19,8 @@ type Store struct {
 	client *mongo.Client
 }
 
-func NewStore() (store *Store, err error) {
-	cl, err := mongo.NewClient(options.Client().ApplyURI("mongodb://localhost:27017").SetRegistry(mgocompat.NewRegistryBuilder().Build()))
+func NewStore(url string) (store *Store, err error) {
+	cl, err := mongo.NewClient(options.Client().ApplyURI(url).SetRegistry(mgocompat.NewRegistryBuilder().Build()))
 	if err != nil {
 		return
 	}
@@ -77,6 +77,11 @@ func (sf *SuperFloat) SetBSON(raw bson.RawValue) error {
 		*sf = SuperFloat(decimal.NewFromFloat(d))
 		return nil
 	}
+}
+
+func (sf *SuperFloat) Float64() float64 {
+	f, _ := decimal.Decimal(*sf).Float64()
+	return f
 }
 
 type ProductDto struct {

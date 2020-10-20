@@ -7,7 +7,7 @@ import (
 )
 
 type Requester struct {
-	client http.Client
+	client *http.Client
 }
 
 func (r *Requester) GetCSV(url string) (io.ReadCloser, error) {
