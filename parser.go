@@ -23,7 +23,7 @@ func ParseCSV(data io.ReadCloser) (products []Product, err error) {
 			if err == io.EOF {
 				break
 			}
-			return
+			return products, err
 		}
 
 		if len(values) < 2 {
@@ -39,7 +39,7 @@ func ParseCSV(data io.ReadCloser) (products []Product, err error) {
 			Name:  values[0],
 			Price: price,
 		})
-
 	}
 
+	return products, nil
 }
