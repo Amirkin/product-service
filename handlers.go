@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"errors"
 	"log"
 
 	p "github.com/Amirkin/product-service/proto"
@@ -55,7 +54,7 @@ func (h *Handlers) List(_ context.Context, r *p.ListParams) (*p.ListResponse, er
 
 	return &p.ListResponse{
 		ListProduct: productDtoToProductClient(products),
-	}, errors.New("list")
+	}, nil
 }
 
 func productDtoToProductClient(dto []ProductDto) []*p.Product {
