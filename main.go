@@ -15,7 +15,7 @@ import (
 func main() {
 	log.SetFlags(log.Flags() | log.Llongfile)
 
-	store, err := NewStore("mongodb://localhost:27017")
+	store, err := NewStore("mongodb://deploy_mongo_1:27017")
 	if err != nil {
 		log.Fatalln(err)
 	}
